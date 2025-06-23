@@ -11,28 +11,27 @@ public class ProductServiceImpl implements ProductService{
     private final ProductRepository productRepository;
 
     @Override
-    public Page<Product> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public Page<ProductResponseDto> findAll(Pageable pageable) {
+        return null;
     }
 
     @Override
-    public Product getProductByID(String id) {
-        return productRepository.findById(id).orElse(null);
+    public ProductResponseDto getProductByID(String id) {
+        return null;
     }
 
     @Override
-    public Product saveProduct(Product product) {
-        return productRepository.save(product);
+    public ProductRequestDto saveProduct(Product product) {
+        return null;
     }
 
     @Override
-    public Product updateProduct(Product product) {
-        return productRepository.save(product);
+    public ProductRequestDto updateProduct(Product product) {
+        return null;
     }
 
     @Override
     public void deleteProduct(String id) {
-        productRepository.deleteById(id);
 
     }
 }

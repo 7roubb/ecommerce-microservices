@@ -4,10 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
-    Page<Product> findAll(Pageable pageable);
-    Product getProductByID(String id);
-    Product saveProduct(Product product);
-    Product updateProduct(Product product);
+    Page<ProductResponseDto> findAll(Pageable pageable);
+    ProductResponseDto getProductByID(String id);
+    ProductRequestDto saveProduct(Product product);
+    ProductRequestDto updateProduct(Product product);
     void deleteProduct(String id);
 
 

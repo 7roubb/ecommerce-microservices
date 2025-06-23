@@ -11,9 +11,9 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = LocalValidatorFactoryBean.class)
+@Constraint(validatedBy = LocalizedEntriesValidator.class)
 public @interface ValidLocalizedEntries {
-    String message() default "Invalid localized entries";
+    String message() default "{localized.entry.invalid}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
