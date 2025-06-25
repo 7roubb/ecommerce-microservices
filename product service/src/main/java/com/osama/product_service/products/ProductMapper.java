@@ -29,4 +29,31 @@ public class ProductMapper {
                 ).orElse(null);
 
     }
+    public static Product toProduct(ProductRequestDto requestDto) {
+        return Optional.ofNullable(requestDto)
+                .map(r -> Product.builder()
+                        .name(r.getName())
+                        .description(r.getDescription())
+                        .price(r.getPrice())
+                        .category(r.getCategory())
+                        .tags(r.getTags())
+                        .quantityInStock(r.getQuantityInStock())
+                        .available(r.isAvailable())
+                        .averageRating(0.0) // default value for new products
+                        .numberOfReviews(0) // default value for new products
+                        .localizedNames(r.getLocalizedNames())
+                        .localizedDescriptions(r.getLocalizedDescriptions())
+                        .imageUrls(r.getImageUrls())
+                        .discountPercentage(
+                                r.getDiscountPercentage() != null ? r.getDiscountPercentage() : 0.0
+                        )
+                        .onSale(
+                                r.getOnSale() != null ? r.getOnSale() : false
+                        )
+                        .saleStart(r.getSaleStart())
+                        .saleEnd(r.getSaleEnd())
+                        .deleted(false)
+                        .build())
+                .orElse(null);
+    }
 }
