@@ -25,6 +25,8 @@ import java.util.Map;
 @Builder
 public class ProductRequestDto {
 
+    private String id;
+
     @NotBlank(message = "{product.name.required}")
     @Size(min = 3, max = 100, message = "{name.size.message}")
     private String name;
