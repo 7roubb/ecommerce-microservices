@@ -6,9 +6,7 @@ import org.springframework.data.domain.Pageable;
 public interface ProductService {
     Page<ProductResponseDto> findAll(Pageable pageable);
     ProductResponseDto getProductByID(String id);
-    Boolean saveProduct(Product product);
-    Boolean updateProduct(Product product);
+    Boolean saveProduct(ProductRequestDto product);
+    Boolean updateProduct(ProductRequestDto product);
     Boolean deleteProduct(String id);
-
-
 }
