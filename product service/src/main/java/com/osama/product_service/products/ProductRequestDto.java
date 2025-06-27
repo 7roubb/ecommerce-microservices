@@ -3,23 +3,23 @@ package com.osama.product_service.products;
 import com.osama.product_service.common.OnCreate;
 import com.osama.product_service.common.OnUpdate;
 import com.osama.product_service.common.ValidLocalizedEntries;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Validated
-@Valid
 @Builder
 public class ProductRequestDto {
 
@@ -31,7 +31,7 @@ public class ProductRequestDto {
     private String name;
 
     @NotBlank(groups = OnCreate.class, message = "{product.description.required}")
-    @Size(groups = {OnCreate.class, OnUpdate.class}, min = 3, max = 100, message = "{name.description.message}")
+    @Size(groups = {OnCreate.class, OnUpdate.class}, min = 3, max = 1000, message = "{name.description.message}")
     private String description;
 
     @NotNull(groups = OnCreate.class, message = "{price.is.required}")
@@ -58,8 +58,9 @@ public class ProductRequestDto {
     @ValidLocalizedEntries(groups = {OnCreate.class, OnUpdate.class})
     private Map<String, String> localizedDescriptions;
 
-    @NotEmpty(groups = OnCreate.class, message = "{image.urls.required}")
-    private List<@URL(message = "{invalid.url.format}", groups = OnCreate.class) String> imageUrls;
+    @NotEmpty(groups = OnCreate.class, message = "{image.base64.required}")
+    @Schema(description = "List of Base64 encoded images")
+    private List<@NotBlank(message = "{image.base64.notblank}") String> imageBase64List;
 
     @DecimalMin(value = "0.0", groups = {OnCreate.class, OnUpdate.class}, message = "{discount.cannot.be.negative}")
     @DecimalMax(value = "100.0", groups = {OnCreate.class, OnUpdate.class}, message = "{discount.cannot.exceed}")

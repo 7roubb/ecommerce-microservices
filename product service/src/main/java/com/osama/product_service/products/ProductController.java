@@ -31,13 +31,12 @@ public class ProductController {
         ProductResponseDto product = productService.getProductByID(id);
         return ApiResponse.success(product, HttpStatus.OK, getMessage("product.get.success", id));
     }
-
     @PostMapping
-    public ApiResponse<Boolean> saveProduct(@Validated(OnCreate.class) @RequestBody ProductRequestDto productDto) {
+    public ApiResponse<Boolean> saveProduct(
+            @Validated(OnCreate.class) @RequestBody ProductRequestDto productDto) {
         Boolean result = productService.saveProduct(productDto);
         return ApiResponse.success(result, HttpStatus.CREATED, getMessage("product.create.success", productDto.getName()));
     }
-
     @PutMapping
     public ApiResponse<Boolean> updateProduct(@Validated(OnUpdate.class) @RequestBody ProductRequestDto productDto) {
         Boolean result = productService.updateProduct(productDto);

@@ -43,5 +43,10 @@ public class CustomExceptions {
             super(message);
         }
     }
+    public static class ImageProcessingException extends RuntimeException {
+        public ImageProcessingException(String message) {
+            super(message);
+        }
+    }
 
 }

@@ -39,11 +39,11 @@ public class ProductMapper {
                         .tags(r.getTags())
                         .quantityInStock(r.getQuantityInStock())
                         .available(r.isAvailable())
-                        .averageRating(0.0) // default value for new products
-                        .numberOfReviews(0) // default value for new products
+                        .averageRating(0.0)
+                        .numberOfReviews(0)
                         .localizedNames(r.getLocalizedNames())
                         .localizedDescriptions(r.getLocalizedDescriptions())
-                        .imageUrls(r.getImageUrls())
+                        .imageUrls(r.getImageBase64List())
                         .discountPercentage(
                                 r.getDiscountPercentage() != null ? r.getDiscountPercentage() : 0.0
                         )
