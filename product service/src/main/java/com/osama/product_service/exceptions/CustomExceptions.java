@@ -48,5 +48,10 @@ public class CustomExceptions {
             super(message);
         }
     }
+    public static class ImageStorageException extends RuntimeException {
+        public ImageStorageException(String message) {
+            super(message);
+        }
+    }
 
 }

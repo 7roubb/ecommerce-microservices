@@ -1,4 +1,4 @@
-package com.osama.product_service.common;
+package com.osama.product_service.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

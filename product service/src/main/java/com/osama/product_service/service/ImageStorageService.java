@@ -1,5 +1,6 @@
 package com.osama.product_service.service;
 
+import com.osama.product_service.exceptions.CustomExceptions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class ImageStorageService {
         this.endpoint = sanitizeEndpoint(endpoint);
 
         S3Configuration config = S3Configuration.builder()
-                .pathStyleAccessEnabled(true) // 👈 Critical fix
+                .pathStyleAccessEnabled(true)
                 .build();
 
         this.s3Client = S3Client.builder()
@@ -45,6 +46,7 @@ public class ImageStorageService {
                 .region(Region.US_EAST_1)
                 .build();
     }
+
     private String sanitizeEndpoint(String endpoint) {
         if (endpoint.contains("images.localhost")) {
             log.warn("Detected invalid MinIO endpoint '{}'. Replacing with 'http://localhost:9000'", endpoint);
@@ -66,7 +68,7 @@ public class ImageStorageService {
             return fileName;
         } catch (SdkClientException e) {
             log.error("❌ Failed to upload image to MinIO. Endpoint: {}, Bucket: {}", endpoint, bucketName, e);
-            throw new RuntimeException("MinIO upload failed: " + e.getMessage(), e);
+            throw new CustomExceptions.ImageStorageException(e.getMessage());
         }
     }
 
@@ -78,7 +80,7 @@ public class ImageStorageService {
                     .build());
         } catch (SdkClientException e) {
             log.error("❌ Failed to generate URL for image. Endpoint: {}, Bucket: {}", endpoint, bucketName, e);
-            throw new RuntimeException("MinIO URL generation failed: " + e.getMessage(), e);
+            throw new CustomExceptions.ImageStorageException( e.getMessage());
         }
     }
 }

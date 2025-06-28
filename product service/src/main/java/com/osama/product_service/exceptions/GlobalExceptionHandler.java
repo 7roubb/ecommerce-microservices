@@ -89,6 +89,18 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ApiResponse.error(getMessage("invalid.localized.field", new Object[]{ex.getMessage()}), HttpStatus.BAD_REQUEST));
     }
+    @ExceptionHandler(CustomExceptions.ImageProcessingException.class)
+    public ResponseEntity<ApiResponse<Void>> handleImageProcessingException(CustomExceptions.ImageProcessingException ex) {
+        log.warn("Image processing error: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.error(getMessage("image.processing.error", new Object[]{ex.getMessage()}), HttpStatus.BAD_REQUEST));
+    }
+    @ExceptionHandler(CustomExceptions.ImageStorageException.class)
+    public ResponseEntity<ApiResponse<Void>> handleImageStorageException(CustomExceptions.ImageStorageException ex) {
+        log.warn("Image storage error: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.error(getMessage("image.upload.failed", new Object[]{ex.getMessage()}), HttpStatus.BAD_REQUEST));
+    }
 
     private String getMessage(String messageKey, Object[] args) {
         return messageSource.getMessage(messageKey, args, LocaleContextHolder.getLocale());
