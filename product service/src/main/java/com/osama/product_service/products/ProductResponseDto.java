@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +17,7 @@ import java.util.Map;
 public class ProductResponseDto {
     private String id;
     private String name;
-    private String description;
+    private Set<Map<String, Map<String, String>>> descriptions;
     private double price;
     private Category category;
     private List<String> tags;
@@ -25,7 +26,6 @@ public class ProductResponseDto {
     private double averageRating;
     private int numberOfReviews;
     private Map<String, String> localizedNames;
-    private Map<String, String> localizedDescriptions;
     private List<String> imageUrls;
     private double discountPercentage;
     private boolean onSale;

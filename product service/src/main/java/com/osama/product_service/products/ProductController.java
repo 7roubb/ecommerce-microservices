@@ -1,8 +1,8 @@
 package com.osama.product_service.products;
 
 import com.osama.product_service.common.ApiResponse;
-import com.osama.product_service.common.OnCreate;
-import com.osama.product_service.common.OnUpdate;
+import com.osama.product_service.validation.OnCreate;
+import com.osama.product_service.validation.OnUpdate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

@@ -8,7 +8,6 @@ public class ProductMapper {
                 .map(p -> ProductResponseDto.builder()
                         .id(p.getId())
                         .name(p.getName())
-                        .description(p.getDescription())
                         .price(p.getPrice())
                         .category(p.getCategory())
                         .tags(p.getTags())
@@ -17,7 +16,6 @@ public class ProductMapper {
                         .averageRating(p.getAverageRating())
                         .numberOfReviews(p.getNumberOfReviews())
                         .localizedNames(p.getLocalizedNames())
-                        .localizedDescriptions(p.getLocalizedDescriptions())
                         .imageUrls(p.getImageUrls())
                         .discountPercentage(p.getDiscountPercentage())
                         .onSale(p.isOnSale())
@@ -25,6 +23,7 @@ public class ProductMapper {
                         .saleStart(p.getSaleStart())
                         .createdAt(product.getCreatedAt())
                         .updatedAt(product.getUpdatedAt())
+                        .descriptions(product.getDescriptions())
                         .build()
                 ).orElse(null);
 
@@ -33,7 +32,7 @@ public class ProductMapper {
         return Optional.ofNullable(requestDto)
                 .map(r -> Product.builder()
                         .name(r.getName())
-                        .description(r.getDescription())
+                        .descriptions(r.getDescriptions())
                         .price(r.getPrice())
                         .category(r.getCategory())
                         .tags(r.getTags())
@@ -42,7 +41,6 @@ public class ProductMapper {
                         .averageRating(0.0)
                         .numberOfReviews(0)
                         .localizedNames(r.getLocalizedNames())
-                        .localizedDescriptions(r.getLocalizedDescriptions())
                         .imageUrls(r.getImageBase64List())
                         .discountPercentage(
                                 r.getDiscountPercentage() != null ? r.getDiscountPercentage() : 0.0

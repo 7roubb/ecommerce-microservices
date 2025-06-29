@@ -1,10 +1,10 @@
 package com.osama.product_service.products;
 
-import com.osama.product_service.common.OnCreate;
-import com.osama.product_service.common.OnUpdate;
-import com.osama.product_service.common.ValidLocalizedEntries;
+import com.osama.product_service.validation.OnCreate;
+import com.osama.product_service.validation.OnUpdate;
+import com.osama.product_service.validation.ValidLocalizedEntries;
+import com.osama.product_service.validation.ValidProductDescription;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,9 +31,10 @@ public class ProductRequestDto {
     @Size(groups = {OnCreate.class, OnUpdate.class}, min = 3, max = 100, message = "{name.size.message}")
     private String name;
 
-    @NotBlank(groups = OnCreate.class, message = "{product.description.required}")
-    @Size(groups = {OnCreate.class, OnUpdate.class}, min = 3, max = 1000, message = "{name.description.message}")
-    private String description;
+    // Changed to set of attribute maps with validation
+    @NotEmpty(groups = OnCreate.class, message = "{product.descriptions.required}")
+    @ValidProductDescription(groups = {OnCreate.class, OnUpdate.class})
+    private Set<Map<String, Map<String, String>>> descriptions;
 
     @NotNull(groups = OnCreate.class, message = "{price.is.required}")
     @Positive(groups = {OnCreate.class, OnUpdate.class}, message = "{price.must.positive}")
@@ -54,9 +56,6 @@ public class ProductRequestDto {
 
     @ValidLocalizedEntries(groups = {OnCreate.class, OnUpdate.class})
     private Map<String, String> localizedNames;
-
-    @ValidLocalizedEntries(groups = {OnCreate.class, OnUpdate.class})
-    private Map<String, String> localizedDescriptions;
 
     @NotEmpty(groups = OnCreate.class, message = "{image.base64.required}")
     @Schema(description = "List of Base64 encoded images")

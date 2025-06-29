@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Document(value = "product")
 @AllArgsConstructor
@@ -22,7 +23,7 @@ public class Product {
     private String id;
 
     private String name;
-    private String description;
+    private Set<Map<String, Map<String, String>>> descriptions;
     private double price;
 
     private Category category;
@@ -35,7 +36,6 @@ public class Product {
     private int numberOfReviews;
 
     private Map<String, String> localizedNames;
-    private Map<String, String> localizedDescriptions;
 
     private List<String> imageUrls;
 

@@ -62,14 +62,13 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByIdAndDeletedFalse(productDto.getId())
                 .map(existingProduct -> {
                     Optional.ofNullable(productDto.getName()).ifPresent(existingProduct::setName);
-                    Optional.ofNullable(productDto.getDescription()).ifPresent(existingProduct::setDescription);
+                    Optional.ofNullable(productDto.getDescriptions()).ifPresent(existingProduct::setDescriptions);
                     Optional.of(productDto.getPrice()).ifPresent(existingProduct::setPrice);
                     Optional.ofNullable(productDto.getCategory()).ifPresent(existingProduct::setCategory);
                     Optional.ofNullable(productDto.getTags()).ifPresent(existingProduct::setTags);
                     Optional.of(productDto.getQuantityInStock()).ifPresent(existingProduct::setQuantityInStock);
                     existingProduct.setAvailable(productDto.isAvailable());
                     Optional.ofNullable(productDto.getLocalizedNames()).ifPresent(existingProduct::setLocalizedNames);
-                    Optional.ofNullable(productDto.getLocalizedDescriptions()).ifPresent(existingProduct::setLocalizedDescriptions);
                     Optional.of(productDto.getDiscountPercentage()).ifPresent(existingProduct::setDiscountPercentage);
                     existingProduct.setOnSale(productDto.getOnSale());
                     Optional.ofNullable(productDto.getSaleStart()).ifPresent(existingProduct::setSaleStart);

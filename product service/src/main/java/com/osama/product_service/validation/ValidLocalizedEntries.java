@@ -1,8 +1,7 @@
-package com.osama.product_service.common;
+package com.osama.product_service.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
